@@ -48,9 +48,7 @@ $(document).ready(function(){
       $('.error_last_name').show();
     }
 
-  })
-
-
+  });
 
   // Pagination:
   // Hide the whole patient index section
@@ -63,7 +61,19 @@ $("ul.link_list > li > a").click(function() {
   $("ul.patient_list > li").hide();
   var patient_list = $(this).attr("patient_num");
   $("li.section_" + patient_list).show();
-})  
+});
+
+  // $.paginate = function(){
+  //   $('ul.patient_list > li').hide();
+  //   $('li.section_1').show();
+  //   $("ul.link_list > li > a").click(function() {
+  //     $("ul.patient_list > li").hide();
+  //     var patient_list = $(this).attr("patient_num");
+  //   $("li.section_" + patient_list).show();
+  //   });
+  // }; 
+
+  // $('.index-data').paginate 
 
 });
 
@@ -195,11 +205,18 @@ $(document).on('click', '.search-submit', function(){
     type: 'GET',
     url: '/clinics/' + clinic_id + '/patients/' + 'search',
     dataType: 'script',
-    data: { q: searchSubmission }
+    data: { q: searchSubmission },
+    success: function() {
+      $('ul.patient_list > li').hide();
+      $('li.section_1').show();
+      $("ul.link_list > li > a").click(function() {
+        $("ul.patient_list > li").hide();
+        var patient_list = $(this).attr("patient_num");
+        $("li.section_" + patient_list).show();
+      });
+    }
   });
-  console.log(searchSubmission);
-  console.log(clinic_id);
-  });
+});
 
 
 

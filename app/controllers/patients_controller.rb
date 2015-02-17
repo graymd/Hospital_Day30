@@ -14,6 +14,10 @@ class PatientsController < ApplicationController
     else
       @clinic.patients
     end
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def show
