@@ -187,6 +187,38 @@ $(document).on('click', '.to-pay-bill', function(){
   });
 });
 
+jQuery.ajaxSetup({ cache: true });
+$(document).on('click', '.search-submit', function(){
+  var searchSubmission = $('#srch-term').val();
+  var clinic_id = $(this).attr('clinic_id');
+  $.ajax({
+    type: 'GET',
+    url: '/clinics/' + clinic_id + '/patients/' + 'search',
+    dataType: 'script',
+    data: { q: searchSubmission }
+  });
+  console.log(searchSubmission);
+  console.log(clinic_id);
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

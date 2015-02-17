@@ -145,6 +145,20 @@ class PatientsController < ApplicationController
     end
   end
 
+  def search
+    @clinic = Clinic.find params[:clinic_id]
+    if !params[:q].blank? 
+      @patients = Patient.where("first_name LIKE ? OR last_name LIKE ? OR date_of_birth LIKE ? OR description LIKE ? OR gender LIKE ? OR blood_type LIKE ? OR workflow_state LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")
+    else
+      @patients = Patient.all
+    end
+    respond_to do |format|
+      format.js
+      format.html
+    end
+    puts params[:_]
+  end
+
 private
   def patient_params
     params.require(:patient).permit(
